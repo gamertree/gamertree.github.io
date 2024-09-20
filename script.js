@@ -23,7 +23,7 @@ function showGamerPage(params) {
     document.getElementById('twitch-link').href = `https://www.twitch.tv/${params.twitch}`;
     document.getElementById('discord-link').href = `https://discord.com/invite/${params.discord}`;
     document.getElementById('twitter-link').href = `https://twitter.com/${params.twitter}`;
-    document.getElementById('youtube-link').href = `https://youtube.com/${params.youtube}`;
+    document.getElementById('youtube-link').href = `https://youtube.com/@${params.youtube}`;
     document.getElementById('instagram-link').href = `https://www.instagram.com/${params.instagram}`;
     document.getElementById('paypal-link').href = `https://www.paypal.me/${params.paypal}`;
     document.getElementById('onlyfans-link').href = `https://onlyfans.com/${params.onlyfans}`;
