@@ -60,8 +60,8 @@ document.getElementById('generate-button').addEventListener('click', function() 
     const onlyfansUsername = document.getElementById('onlyfans-username').value.trim();
 
     if (twitchUsername !== "") {
-        // Show the gamer page
-        showGamerPage({
+        // Prepare the params for the gamer page
+        const params = {
             twitch: twitchUsername,
             discord: discordUsername,
             twitter: twitterUsername,
@@ -69,7 +69,10 @@ document.getElementById('generate-button').addEventListener('click', function() 
             instagram: instagramUsername,
             paypal: paypalUsername,
             onlyfans: onlyfansUsername
-        });
+        };
+
+        // Show the gamer page
+        showGamerPage(params);
 
         // Construct the share URL
         const shareUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
