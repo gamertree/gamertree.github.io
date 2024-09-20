@@ -62,8 +62,8 @@ document.getElementById('generate-button').addEventListener('click', function() 
         // Automatically copy the share URL to the clipboard
         navigator.clipboard.writeText(shareUrl).then(() => {
             alert("Your personalized page URL has been copied to clipboard!");
-            // Redirect to the generated URL
-            window.location.href = shareUrl; // This line redirects the user
+            // Redirect to the same page, allowing users to bookmark it
+            window.history.pushState({}, '', shareUrl); // Update the URL without reloading
         }).catch(err => {
             console.error('Failed to copy: ', err);
         });
