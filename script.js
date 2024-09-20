@@ -1,3 +1,32 @@
+// Function to get query parameters
+function getQueryParams() {
+    const params = new URLSearchParams(window.location.search);
+    return {
+        twitch: params.get('twitch'),
+        discord: params.get('discord'),
+        twitter: params.get('twitter'),
+        youtube: params.get('youtube'),
+        instagram: params.get('instagram'),
+        paypal: params.get('paypal'),
+        onlyfans: params.get('onlyfans')
+    };
+}
+
+// Populate input fields from query parameters
+function populateFieldsFromParams() {
+    const params = getQueryParams();
+    if (params.twitch) document.getElementById('twitch-username').value = params.twitch;
+    if (params.discord) document.getElementById('discord-username').value = params.discord;
+    if (params.twitter) document.getElementById('twitter-username').value = params.twitter;
+    if (params.youtube) document.getElementById('youtube-username').value = params.youtube;
+    if (params.instagram) document.getElementById('instagram-username').value = params.instagram;
+    if (params.paypal) document.getElementById('paypal-username').value = params.paypal;
+    if (params.onlyfans) document.getElementById('onlyfans-username').value = params.onlyfans;
+}
+
+// Call the function to populate fields when the page loads
+populateFieldsFromParams();
+
 document.getElementById('generate-button').addEventListener('click', function() {
     const twitchUsername = document.getElementById('twitch-username').value.trim();
     const discordUsername = document.getElementById('discord-username').value.trim();
