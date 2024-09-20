@@ -83,7 +83,7 @@ document.getElementById('share-button').addEventListener('click', function() {
         alert("Your personalized page URL has been copied to clipboard!");
         
         // Redirect to the generated URL
-        window.location.href = shareUrl; // This line redirects the user
+        window.location.href = shareUrl; // This line redirects the user to the generated page
     }).catch(err => {
         console.error('Failed to copy: ', err);
     });
