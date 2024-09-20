@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: https://gamertree.github.io/sitemap.xml
+Disallow: https://gamertree.github.io/googlea1d841bd0f96ac4c.html
+
+Sitemap: https://gamertree.github.io/sitemap.xml
