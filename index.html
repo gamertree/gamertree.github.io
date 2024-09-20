@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gamer Tree</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="GamerTree.png" alt="Gamer Logo" class="logo">
+            <h1>Your Social media Champ</h1>
+        </header>
+
+        <section class="input-section">
+            <input type="text" id="twitch-username" placeholder="Enter your Twitch username">
+            <input type="text" id="discord-username" placeholder="Enter your Discord invite code">
+            <input type="text" id="twitter-username" placeholder="Enter your Twitter handle">
+            <input type="text" id="youtube-username" placeholder="Enter your YouTube channel ID">
+            <input type="text" id="instagram-username" placeholder="Instagram Username" />
+            <input type="text" id="paypal-username" placeholder="PayPal Username" />
+            <input type="text" id="onlyfans-username" placeholder="OnlyFans Username" />
+
+            <button id="generate-button">Generate My Gaming Page</button>
+        </section>
+
+        <section id="gamer-page" class="hidden">
+            <section class="iframe-section">
+                <iframe id="twitch-iframe" frameborder="0" allowfullscreen="true" scrolling="no" height="300" width="100%"></iframe>
+            </section>
+        
+            <section class="link-section">
+                <a href="#" id="discord-link" class="link-button">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+                <a href="#" id="twitter-link" class="link-button">
+                    <i class="fab fa-twitter"></i> Twitter
+                </a>
+                <a href="#" id="twitch-link" class="link-button">
+                    <i class="fab fa-twitch"></i> Twitch
+                </a>
+                <a href="#" id="youtube-link" class="link-button">
+                    <i class="fab fa-youtube"></i> YouTube
+                </a>
+                <a href="#" id="instagram-link" class="link-button">
+                    <i class="fab fa-instagram"></i> Instagram
+                </a>
+                <a href="#" id="paypal-link" class="link-button">
+                    <i class="fab fa-paypal"></i> PayPal
+                </a>
+                <a href="#" id="onlyfans-link" class="link-button">
+                    <img src="/icons/OnlyFans_logo.svg" alt="OnlyFans" class="social-icon"> +18
+                </a>
+            </section>
+        
+            <button id="share-button" class="share-button hidden">Share Your Page</button>
+
+        </section>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
