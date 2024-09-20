@@ -22,6 +22,28 @@ function populateFieldsFromParams() {
     if (params.instagram) document.getElementById('instagram-username').value = params.instagram;
     if (params.paypal) document.getElementById('paypal-username').value = params.paypal;
     if (params.onlyfans) document.getElementById('onlyfans-username').value = params.onlyfans;
+
+    // Check if there are existing parameters to show gamer page
+    if (params.twitch) {
+        showGamerPage(params);
+    }
+}
+
+// Function to show gamer page
+function showGamerPage(params) {
+    document.getElementById('gamer-page').classList.remove('hidden');
+    document.querySelector('.input-section').classList.add('hidden');
+
+    const iframe = document.getElementById('twitch-iframe');
+    iframe.src = `https://player.twitch.tv/?channel=${params.twitch}&parent=gamertree.github.io`;
+
+    document.getElementById('twitch-link').href = `https://www.twitch.tv/${params.twitch}`;
+    document.getElementById('discord-link').href = `https://discord.com/invite/${params.discord}`;
+    document.getElementById('twitter-link').href = `https://twitter.com/${params.twitter}`;
+    document.getElementById('youtube-link').href = `https://youtube.com/c/${params.youtube}`;
+    document.getElementById('instagram-link').href = `https://www.instagram.com/${params.instagram}`;
+    document.getElementById('paypal-link').href = `https://www.paypal.me/${params.paypal}`;
+    document.getElementById('onlyfans-link').href = `https://onlyfans.com/${params.onlyfans}`;
 }
 
 // Call the function to populate fields when the page loads
@@ -37,24 +59,16 @@ document.getElementById('generate-button').addEventListener('click', function() 
     const onlyfansUsername = document.getElementById('onlyfans-username').value.trim();
 
     if (twitchUsername !== "") {
-        // Show the gamer page section
-        document.getElementById('gamer-page').classList.remove('hidden');
-        
-        // Hide the input section
-        document.querySelector('.input-section').classList.add('hidden');
-
-        // Update the Twitch iframe
-        const iframe = document.getElementById('twitch-iframe');
-        iframe.src = `https://player.twitch.tv/?channel=${twitchUsername}&parent=gamertree.github.io`;
-
-        // Update the social media links
-        document.getElementById('twitch-link').href = `https://www.twitch.tv/${twitchUsername}`;
-        document.getElementById('discord-link').href = `https://discord.com/invite/${discordUsername}`;
-        document.getElementById('twitter-link').href = `https://twitter.com/${twitterUsername}`;
-        document.getElementById('youtube-link').href = `https://youtube.com/c/${youtubeUsername}`;
-        document.getElementById('instagram-link').href = `https://www.instagram.com/${instagramUsername}`;
-        document.getElementById('paypal-link').href = `https://www.paypal.me/${paypalUsername}`;
-        document.getElementById('onlyfans-link').href = `https://onlyfans.com/${onlyfansUsername}`;
+        // Show the gamer page
+        showGamerPage({
+            twitch: twitchUsername,
+            discord: discordUsername,
+            twitter: twitterUsername,
+            youtube: youtubeUsername,
+            instagram: instagramUsername,
+            paypal: paypalUsername,
+            onlyfans: onlyfansUsername
+        });
 
         // Construct the share URL
         const shareUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
