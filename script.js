@@ -12,24 +12,7 @@ function getQueryParams() {
     };
 }
 
-// Populate input fields from query parameters
-function populateFieldsFromParams() {
-    const params = getQueryParams();
-    if (params.twitch) document.getElementById('twitch-username').value = params.twitch;
-    if (params.discord) document.getElementById('discord-username').value = params.discord;
-    if (params.twitter) document.getElementById('twitter-username').value = params.twitter;
-    if (params.youtube) document.getElementById('youtube-username').value = params.youtube;
-    if (params.instagram) document.getElementById('instagram-username').value = params.instagram;
-    if (params.paypal) document.getElementById('paypal-username').value = params.paypal;
-    if (params.onlyfans) document.getElementById('onlyfans-username').value = params.onlyfans;
-
-    // Check if there are existing parameters to show gamer page
-    if (params.twitch) {
-        showGamerPage(params);
-    }
-}
-
-// Function to show gamer page
+// Function to show the gamer page
 function showGamerPage(params) {
     document.getElementById('gamer-page').classList.remove('hidden');
     document.querySelector('.input-section').classList.add('hidden');
@@ -44,6 +27,24 @@ function showGamerPage(params) {
     document.getElementById('instagram-link').href = `https://www.instagram.com/${params.instagram}`;
     document.getElementById('paypal-link').href = `https://www.paypal.me/${params.paypal}`;
     document.getElementById('onlyfans-link').href = `https://onlyfans.com/${params.onlyfans}`;
+}
+
+// Populate input fields from query parameters and show gamer page if applicable
+function populateFieldsFromParams() {
+    const params = getQueryParams();
+    if (params.twitch) {
+        // Pre-fill the input fields
+        document.getElementById('twitch-username').value = params.twitch;
+        document.getElementById('discord-username').value = params.discord || '';
+        document.getElementById('twitter-username').value = params.twitter || '';
+        document.getElementById('youtube-username').value = params.youtube || '';
+        document.getElementById('instagram-username').value = params.instagram || '';
+        document.getElementById('paypal-username').value = params.paypal || '';
+        document.getElementById('onlyfans-username').value = params.onlyfans || '';
+        
+        // Show the gamer page
+        showGamerPage(params);
+    }
 }
 
 // Call the function to populate fields when the page loads
