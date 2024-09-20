@@ -56,35 +56,16 @@ document.getElementById('generate-button').addEventListener('click', function() 
         document.getElementById('paypal-link').href = `https://www.paypal.me/${paypalUsername}`;
         document.getElementById('onlyfans-link').href = `https://onlyfans.com/${onlyfansUsername}`;
 
-        // Show the share button
-        document.getElementById('share-button').classList.remove('hidden');
+        // Construct the share URL
+        const shareUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
 
-        // Add pulse effect to buttons when they appear
-        document.querySelectorAll('.link-button').forEach(button => {
-            button.classList.add('pulse');
-            setTimeout(() => button.classList.remove('pulse'), 500);
+        // Automatically copy the share URL to the clipboard
+        navigator.clipboard.writeText(shareUrl).then(() => {
+            alert("Your personalized page URL has been copied to clipboard!");
+            // Redirect to the generated URL
+            window.location.href = shareUrl; // This line redirects the user
+        }).catch(err => {
+            console.error('Failed to copy: ', err);
         });
     }
-});
-
-// Share button functionality
-document.getElementById('share-button').addEventListener('click', function() {
-    const twitchUsername = document.getElementById('twitch-username').value.trim();
-    const discordUsername = document.getElementById('discord-username').value.trim();
-    const twitterUsername = document.getElementById('twitter-username').value.trim();
-    const youtubeUsername = document.getElementById('youtube-username').value.trim();
-    const instagramUsername = document.getElementById('instagram-username').value.trim();
-    const paypalUsername = document.getElementById('paypal-username').value.trim();
-    const onlyfansUsername = document.getElementById('onlyfans-username').value.trim();
-
-    const shareUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
-    
-    navigator.clipboard.writeText(shareUrl).then(() => {
-        alert("Your personalized page URL has been copied to clipboard!");
-        
-        // Redirect to the generated URL
-        window.location.href = shareUrl; // This line redirects the user to the generated page
-    }).catch(err => {
-        console.error('Failed to copy: ', err);
-    });
 });
