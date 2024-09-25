@@ -50,7 +50,22 @@ function populateFieldsFromParams() {
 // Call the function to populate fields when the page loads
 populateFieldsFromParams();
 
-document.getElementById('generate-button').addEventListener('click', function() {
+// Function to shorten URL using TinyURL API
+async function shortenURL(longUrl) {
+    const apiUrl = `https://api.tinyurl.com/create?url=${encodeURIComponent(longUrl)}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        return data.data.tiny_url; // Return the shortened URL
+    } catch (error) {
+        console.error('Error shortening URL:', error);
+        return null; // Return null if there's an error
+    }
+}
+
+// Generate the page and handle sharing
+document.getElementById('generate-button').addEventListener('click', async function() {
     const twitchUsername = document.getElementById('twitch-username').value.trim();
     const discordUsername = document.getElementById('discord-username').value.trim();
     const twitterUsername = document.getElementById('twitter-username').value.trim();
@@ -74,16 +89,23 @@ document.getElementById('generate-button').addEventListener('click', function() 
         // Show the gamer page
         showGamerPage(params);
 
-        // Construct the share URL
-        const shareUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
+        // Construct the long share URL
+        const longUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
 
-        // Automatically copy the share URL to the clipboard
-        navigator.clipboard.writeText(shareUrl).then(() => {
-            alert("Your personalized page URL has been copied to clipboard!");
-            // Update the URL in the address bar without reloading the page
-            window.history.pushState({}, '', shareUrl); // Update URL
-        }).catch(err => {
-            console.error('Failed to copy: ', err);
-        });
+        // Shorten the long URL using TinyURL
+        const shortUrl = await shortenURL(longUrl);
+
+        if (shortUrl) {
+            // Automatically copy the shortened URL to the clipboard
+            navigator.clipboard.writeText(shortUrl).then(() => {
+                alert("Your personalized page URL has been copied to clipboard: " + shortUrl);
+                // Update the URL in the address bar without reloading the page
+                window.history.pushState({}, '', shortUrl); // Update URL with short link
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        } else {
+            console.error("Failed to shorten the URL.");
+        }
     }
 });
