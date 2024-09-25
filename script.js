@@ -50,18 +50,27 @@ function populateFieldsFromParams() {
 // Call the function to populate fields when the page loads
 populateFieldsFromParams();
 
-// Function to shorten URL using is.gd API
+// Function to shorten URL using TinyURL API
 async function shortenURL(longUrl) {
-    const apiUrl = `https://is.gd/create.php?format=json&url=${encodeURIComponent(longUrl)}`;
+    const apiUrl = `https://api.tinyurl.com/create?url=${encodeURIComponent(longUrl)}`;
 
     try {
-        const response = await fetch(apiUrl);
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                // Include your TinyURL API key here if required, else it can be left out
+                // 'Authorization': 'Bearer YOUR_API_KEY'
+            },
+            body: JSON.stringify({url: longUrl})
+        });
+        
         if (!response.ok) {
             throw new Error('Failed to shorten the URL');
         }
 
         const data = await response.json();
-        return data.shorturl; // Return the shortened URL from is.gd
+        return data.shortUrl; // Return the shortened URL from TinyURL
     } catch (error) {
         console.error('Error shortening URL:', error);
         return null;
@@ -96,7 +105,7 @@ document.getElementById('generate-button').addEventListener('click', async funct
         // Construct the long share URL
         const longUrl = `https://gamertree.github.io/?twitch=${twitchUsername}&discord=${discordUsername}&twitter=${twitterUsername}&youtube=${youtubeUsername}&instagram=${instagramUsername}&paypal=${paypalUsername}&onlyfans=${onlyfansUsername}`;
 
-        // Shorten the long URL using is.gd
+        // Shorten the long URL using TinyURL
         const shortUrl = await shortenURL(longUrl);
 
         if (shortUrl) {
