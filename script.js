@@ -50,27 +50,19 @@ function populateFieldsFromParams() {
 // Call the function to populate fields when the page loads
 populateFieldsFromParams();
 
-// Function to shorten URL using TinyURL API
+// Function to shorten URL using TinyURL
 async function shortenURL(longUrl) {
-    const apiUrl = `https://api.tinyurl.com/create?url=${encodeURIComponent(longUrl)}`;
+    const apiUrl = `https://tinyurl.com/api-create.php?url=${encodeURIComponent(longUrl)}`;
 
     try {
-        const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                // Include your TinyURL API key here if required, else it can be left out
-                // 'Authorization': 'Bearer YOUR_API_KEY'
-            },
-            body: JSON.stringify({url: longUrl})
-        });
+        const response = await fetch(apiUrl);
         
         if (!response.ok) {
             throw new Error('Failed to shorten the URL');
         }
 
-        const data = await response.json();
-        return data.shortUrl; // Return the shortened URL from TinyURL
+        const shortUrl = await response.text(); // TinyURL returns the shortened URL as plain text
+        return shortUrl; // Return the shortened URL from TinyURL
     } catch (error) {
         console.error('Error shortening URL:', error);
         return null;
